@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import '../widgets/custom_app_bar.dart';
@@ -89,9 +91,9 @@ class _GamePageState extends State<GamePage> {
             ),
             const SizedBox(height: 20),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
-                Padding(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
                     'Your Scores',
@@ -100,7 +102,14 @@ class _GamePageState extends State<GamePage> {
                       color: Colors.white,
                     ),
                   ),
-                )
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(9.0),
+                  child: Text(
+                    'High Score: ${scores.isNotEmpty ? scores.reduce(max) : 0}',
+                    style: const TextStyle(fontSize: 14, color: Colors.white),
+                  ),
+                ),
               ],
             ),
             Expanded(
