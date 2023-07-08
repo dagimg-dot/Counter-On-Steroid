@@ -1,15 +1,18 @@
 import 'package:counter_on_steroid/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
+import 'game_page.dart';
+
 class SurprisePage extends StatefulWidget {
-  const SurprisePage({super.key});
+  const SurprisePage({super.key, required this.counted});
+
+  final int counted;
 
   @override
   State<SurprisePage> createState() => _SurprisePageState();
 }
 
 class _SurprisePageState extends State<SurprisePage> {
-  bool _showSuccessIcon = true;
   final Color mainColor = const Color(0xFF121212);
 
   @override
@@ -21,15 +24,14 @@ class _SurprisePageState extends State<SurprisePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (_showSuccessIcon)
-              const Icon(
-                Icons.check_circle,
-                color: Colors.amber,
-                size: 100,
-              ),
+            const Icon(
+              Icons.check_circle,
+              color: Colors.amber,
+              size: 100,
+            ),
             const SizedBox(height: 20),
             const Padding(
-              padding:  EdgeInsets.all(8.0),
+              padding: EdgeInsets.all(8.0),
               child: Text(
                 'Congratulations, you have found the surprise!',
                 style: TextStyle(
@@ -42,15 +44,18 @@ class _SurprisePageState extends State<SurprisePage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  _showSuccessIcon = false;
-                });
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => GamePage(
+                              counted: widget.counted,
+                            )));
               },
               child: const Text(
                 'Continue',
                 style: TextStyle(
-                  // color: Colors.white,
-                ),
+                    // color: Colors.white,
+                    ),
               ),
             ),
           ],
