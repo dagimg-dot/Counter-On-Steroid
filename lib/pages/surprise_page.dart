@@ -19,7 +19,10 @@ class _SurprisePageState extends State<SurprisePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: mainColor,
-      appBar: CustomAppBar(mainColor: mainColor),
+      appBar: CustomAppBar(
+        defaultLeading: true,
+        mainColor: mainColor,
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
