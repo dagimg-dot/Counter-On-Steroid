@@ -19,10 +19,7 @@ class _GamePageState extends State<GamePage> {
   List<int> scores = [];
 
   bool isCorrect(int currNum) {
-    if (widget.counted % currNum == 0) {
-      return true;
-    }
-    return false;
+    return widget.counted % currNum == 0 ? true : false;
   }
 
   int calCounted(int num) {
@@ -99,44 +96,48 @@ class _GamePageState extends State<GamePage> {
                   child: Text(
                     'Your Scores',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 21,
                       color: Colors.white,
                     ),
                   ),
                 )
               ],
             ),
-            const SizedBox(height: 10),
             Expanded(
                 child: ListView.builder(
               shrinkWrap: true,
               itemCount: scores.length,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 5,
-                    horizontal: 8,
-                  ),
-                  child: Material(
-                    color: Colors.transparent,
-                    child: ListTile(
-                      tileColor: Colors.grey[900],
-                      title: Text(
-                        '${scores[index]} / ${calCounted(widget.counted)}',
-                        style: const TextStyle(color: Colors.white),
-                      ),
-                      trailing: Icon(
-                        scores[index] > widget.counted / 2
-                            ? Icons.check
-                            : Icons.close,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                );
+                return customListTile(index);
               },
             ))
           ],
+        ),
+      ),
+    );
+  }
+
+  Container customListTile(int index) {
+    return Container(
+      margin: const EdgeInsets.symmetric(
+        vertical: 5,
+        horizontal: 8,
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: ListTile(
+          tileColor: Colors.grey[900],
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          title: Text(
+            '${scores[index]} / ${calCounted(widget.counted)}',
+            style: const TextStyle(color: Colors.white),
+          ),
+          trailing: Icon(
+            scores[index] > widget.counted / 2 ? Icons.check : Icons.close,
+            color: Colors.white,
+          ),
         ),
       ),
     );
