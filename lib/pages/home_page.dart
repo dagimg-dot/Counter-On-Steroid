@@ -15,21 +15,21 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
-    if(_counter % 10 == 0 && _counter != 0 ) {
+    if (_counter % 10 == 0 && _counter != 0) {
       SnackBar snackBar = const SnackBar(
         behavior: SnackBarBehavior.floating,
         content: Text(
           'Remember, I didn\'t say which button to click!',
           style: TextStyle(
             fontSize: 16,
-            color: Colors.white, 
+            color: Colors.white,
           ),
           textAlign: TextAlign.center,
         ),
         backgroundColor: Colors.amber,
         duration: Duration(seconds: 3),
       );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
     setState(() {
       _counter++;
@@ -60,12 +60,30 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           GestureDetector(
             onTap: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SurprisePage(),
-                ),
-              )
+              _counter < 10
+                  ? ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        behavior: SnackBarBehavior.floating,
+                        content: Text(
+                          'Too early',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        backgroundColor: Colors.amber,
+                        duration: Duration(seconds: 3),
+                      ),
+                    )
+                  : Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SurprisePage(
+                          counted: _counter,
+                        ),
+                      ),
+                    )
             },
             onDoubleTap: () => {
               setState(() {
