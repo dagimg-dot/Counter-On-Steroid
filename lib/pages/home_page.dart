@@ -15,19 +15,19 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
-    if (_counter % 10 == 0 && _counter != 0) {
-      SnackBar snackBar = const SnackBar(
+    if (_counter % 10 == 9 && _counter != 0) {
+      SnackBar snackBar = SnackBar(
         behavior: SnackBarBehavior.floating,
         content: Text(
           'Remember, I didn\'t say which button to click!',
           style: TextStyle(
             fontSize: 16,
-            color: Colors.white,
+            color: mainColor,
           ),
           textAlign: TextAlign.center,
         ),
         backgroundColor: Colors.amber,
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 2),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
@@ -62,18 +62,18 @@ class _MyHomePageState extends State<MyHomePage> {
             onTap: () => {
               _counter < 10
                   ? ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
+                      SnackBar(
                         behavior: SnackBarBehavior.floating,
                         content: Text(
                           'Too early',
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.white,
+                            color: mainColor,
                           ),
                           textAlign: TextAlign.center,
                         ),
                         backgroundColor: Colors.amber,
-                        duration: Duration(seconds: 3),
+                        duration: const Duration(seconds: 3),
                       ),
                     )
                   : Navigator.push(
@@ -100,9 +100,9 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               child: Center(
                 child: Text('$_counter',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 40,
-                      color: Colors.white,
+                      color: mainColor,
                     )),
               ),
             ),
@@ -125,10 +125,10 @@ class _MyHomePageState extends State<MyHomePage> {
           Radius.circular(20),
         ),
       ),
-      child: const Icon(
+      child: Icon(
         Icons.add,
         size: 30,
-        color: Colors.white,
+        color: mainColor,
       ),
     );
   }
