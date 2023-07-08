@@ -106,21 +106,32 @@ class _GamePageState extends State<GamePage> {
                 )
               ],
             ),
+            const SizedBox(height: 10),
             Expanded(
                 child: ListView.builder(
+              shrinkWrap: true,
               itemCount: scores.length,
               itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  tileColor: Colors.grey[900],
-                  title: Text(
-                    '${scores[index]} / ${calCounted(widget.counted)}',
-                    style: const TextStyle(color: Colors.white),
+                return Container(
+                  margin: const EdgeInsets.symmetric(
+                    vertical: 5,
+                    horizontal: 8,
                   ),
-                  trailing: Icon(
-                    scores[index] > widget.counted / 2
-                        ? Icons.check
-                        : Icons.close,
-                    color: Colors.white,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: ListTile(
+                      tileColor: Colors.grey[900],
+                      title: Text(
+                        '${scores[index]} / ${calCounted(widget.counted)}',
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      trailing: Icon(
+                        scores[index] > widget.counted / 2
+                            ? Icons.check
+                            : Icons.close,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 );
               },
