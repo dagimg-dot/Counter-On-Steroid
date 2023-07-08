@@ -5,10 +5,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
     super.key,
     required this.mainColor,
     this.action,
+    this.defaultLeading,
   });
 
   final Color mainColor;
   final Widget? action;
+  final bool? defaultLeading;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
       actions:  [
         action ?? Container(),
       ],
+      automaticallyImplyLeading: defaultLeading ?? false,
     );
   }
   
