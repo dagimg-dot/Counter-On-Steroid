@@ -11,24 +11,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Color mainColor = const Color(0xFF121212);
+  final Color mainColor = const Color(0xFF121212);
   int _counter = 0;
 
   void _incrementCounter() {
     if (_counter % 10 == 9 && _counter != 0) {
-      SnackBar snackBar = SnackBar(
-        behavior: SnackBarBehavior.floating,
-        content: Text(
-          'Remember, I didn\'t say which button to click!',
-          style: TextStyle(
-            fontSize: 16,
-            color: mainColor,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        backgroundColor: Colors.amber,
-        duration: const Duration(seconds: 2),
-      );
+      SnackBar snackBar = customSnackBar('Remember, I didn\'t say which button to click!');
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
     setState(() {
@@ -62,19 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
             onTap: () => {
               _counter < 10
                   ? ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        behavior: SnackBarBehavior.floating,
-                        content: Text(
-                          'Too early',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: mainColor,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        backgroundColor: Colors.amber,
-                        duration: const Duration(seconds: 3),
-                      ),
+                      customSnackBar('Too early'),
                     )
                   : Navigator.push(
                       context,
@@ -109,6 +85,22 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+    );
+  }
+
+  SnackBar customSnackBar(String title) {
+    return SnackBar(
+      behavior: SnackBarBehavior.floating,
+      content: Text(
+        title,
+        style: TextStyle(
+          fontSize: 16,
+          color: mainColor,
+        ),
+        textAlign: TextAlign.center,
+      ),
+      backgroundColor: Colors.amber,
+      duration: const Duration(seconds: 3),
     );
   }
 
